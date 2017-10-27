@@ -1,0 +1,9 @@
+{
+  "name": "VRCar",
+  "main": "index.js",
+  "version": "0.1.0",
+  "___cdn_url": "https://cdn2.rodin.io",
+  "dependencies": {
+    "rodin/main": "0.1.*"
+  }
+}
