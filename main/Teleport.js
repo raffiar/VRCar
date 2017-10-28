@@ -3,7 +3,7 @@ import * as RODIN from 'rodin/main';
 class Teleport {
     constructor(Scene) {
         this.mainScene = Scene;
-        this.portal = new RODIN.Box(0.5, 0.5);
+        this.portal = new RODIN.Box(0.2, 0.2);
         this.portal.position.set(0, 1.6, -1);
         this.initTeleport();
         Teleport.canMove = true;

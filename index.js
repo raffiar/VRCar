@@ -47,3 +47,8 @@ z4.rotation.y = (2* Math.PI) / 3;
 models.add(z4);
 const building = new Building();
 models.add(building);
+
+RODIN.messenger.once(RODIN.CONST.ALL_SCULPTS_READY, () => {
+    let el =  document.getElementById('loader');
+    el.style.display = "none";
+});
