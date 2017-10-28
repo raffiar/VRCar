@@ -6,6 +6,7 @@ class Teleport {
         this.portal = new RODIN.Box(0.5, 0.5);
         this.portal.position.set(0, 1.6, -1);
         this.initTeleport();
+        Teleport.canMove = true;
     }
 
     initTeleport() {
@@ -31,8 +32,10 @@ class Teleport {
     }
 
     teleport(avatar = RODIN.Avatar.active, pos, place) {
-        if (!pos) return;
-        avatar.position = pos;
+        if(Teleport.canMove) {
+            if (!pos) return;
+            avatar.position = pos;
+        }
     }
 }
 

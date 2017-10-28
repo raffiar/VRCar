@@ -1,15 +1,12 @@
 import * as RODIN from 'rodin/main';
+import carBody from './car_details.js';
+import Teleport from './Teleport.js';
 
 export class Car extends RODIN.Sculpt {
     constructor() {
         super();
         this.gazePoint = new RODIN.GazePoint();
-        this.body = new RODIN.Sculpt('./models/car/body.obj');
-        this.body.on(RODIN.CONST.READY, this.onBodyReady.bind(this));
-        this.body.on(RODIN.CONST.GAMEPAD_BUTTON_DOWN, (e) => {
-            e.stopPropagation();
-        });
-
+        this.add(carBody);
         this.engineStarted = false;
         this.startBtn = new RODIN.Sculpt('./models/car/start_btn.obj');
         this.startBtn.on(RODIN.CONST.READY, (evt) => {
@@ -32,12 +29,13 @@ export class Car extends RODIN.Sculpt {
 
         this.door.on(RODIN.CONST.GAMEPAD_BUTTON_DOWN, (e) => {
             e.stopPropagation();
+            Teleport.canMove = !Teleport.canMove;
             RODIN.Avatar.active.position = {x: .8, y: -0.3, z: -5}
         });
         this.transmission = new RODIN.Sculpt('./models/car/ruchnik.obj');
 
         this.transmission.on(RODIN.CONST.READY, (evt) => {
-            evt.target.position.set(-0.008, 0.537, 0.272);
+            evt.target.position.set(-.04, 0.537, 0.272);
             this.add(evt.target);
         });
 
@@ -47,10 +45,6 @@ export class Car extends RODIN.Sculpt {
 
         this.transmission.on(RODIN.CONST.GAMEPAD_BUTTON_DOWN, this.onTransButtonDown.bind(this));
 
-    }
-
-    onBodyReady(evt) {
-        this.add(evt.target);
     }
 
     onDoorHover() {
