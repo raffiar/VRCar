@@ -19,12 +19,6 @@ export class Building extends RODIN.Sculpt{
             this.add(evt.target);
         });
 
-        // const building_04 = new RODIN.Sculpt('./models/building/building_04.obj');
-        // building_04.on(RODIN.CONST.READY, (evt) => {
-        //     evt.target._threeObject = mergeModel(evt.target._threeObject);
-        //     this.add(evt.target);
-        // });
-
         function mergeModel(obj, materialIndex = 0) {
             let finalGeo =new THREE.Geometry();
             for (let i = 0; i < obj.children.length; i++) {

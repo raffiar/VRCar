@@ -1,14 +1,10 @@
 import * as RODIN from 'rodin/main';
-
+import carBody from './car_details.js';
 export class Car extends RODIN.Sculpt {
     constructor() {
         super();
+        this.add(carBody);
         this.gazePoint = new RODIN.GazePoint();
-        this.body = new RODIN.Sculpt('./models/car/body.obj');
-        this.body.on(RODIN.CONST.READY, this.onBodyReady.bind(this));
-        this.body.on(RODIN.CONST.GAMEPAD_BUTTON_DOWN, (e) => {
-            e.stopPropagation();
-        });
 
         this.startBtn = new RODIN.Sculpt('./models/car/start_btn.obj');
         this.startBtn.on(RODIN.CONST.READY, (evt) => {
@@ -47,17 +43,6 @@ export class Car extends RODIN.Sculpt {
             e.stopPropagation();
         });
 
-        function mergeModel(obj, materialIndex = 0) {
-            let finalGeo = new THREE.Geometry();
-            for (let i = 0; i < obj.children.length; i++) {
-                finalGeo.merge(new THREE.Geometry().fromBufferGeometry(obj.children["" + i].geometry));
-            }
-            return new THREE.Mesh(finalGeo, obj.children["" + materialIndex].material);
-        }
-    }
-
-    onBodyReady(evt) {
-        this.add(evt.target);
     }
 
     onDoorHover() {
