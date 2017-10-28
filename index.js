@@ -43,7 +43,7 @@ models.position.z = -5;
 models.add(MainComponent.mainContainer);
 
 const z4 = new Car();
-z4.rotation.y = Math.PI / 6;
+z4.rotation.y = (2* Math.PI) / 3;
 models.add(z4);
 const building = new Building();
 models.add(building);
