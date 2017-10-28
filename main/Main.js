@@ -1,15 +1,16 @@
-/**
- * Created by Reinchard on 10/27/2017.
- */
-import * as R from 'rodin/main';
+import * as RODIN from 'rodin/main';
 import Teleport from "./Teleport.js";
 
 class MainComponent {
     constructor() {
-        this.mainContainer = new R.Plane(10,10, new THREE.MeshBasicMaterial({
-            color: 0x2196F3,
-        }));
-        this.mainContainer.position.set(0, 0, -2);
+        const planeGeometry = new THREE.PlaneBufferGeometry( 14.5, 14.5, 16, 16 );
+        const plane = new THREE.Mesh( planeGeometry );
+        plane.castShadow = false;
+        plane.receiveShadow = true;
+        this.mainContainer = new RODIN.Sculpt(plane);
+        this.mainContainer._threeObject.material = new THREE.MeshStandardMaterial( {
+            color: 0xb8b8b8,
+            map: RODIN.Loader.loadTexture('./textures/CeramicTilesDiff.jpg'),} );
         this.mainContainer.rotation.x = -Math.PI / 2;
         this.teleportScene = new Teleport(this.mainContainer);
     }
