@@ -5,9 +5,11 @@ import Teleport from './Teleport.js';
 export class Car extends RODIN.Sculpt {
     constructor() {
         super();
-        this.gazePoint = new RODIN.GazePoint();
         this.add(carBody);
+        this.gazePoint = new RODIN.GazePoint();
+
         this.engineStarted = false;
+
         this.startBtn = new RODIN.Sculpt('./models/car/start_btn.obj');
         this.startBtn.on(RODIN.CONST.READY, (evt) => {
             evt.target.position.set(-0.22, 0.895, -0.03);
@@ -44,6 +46,7 @@ export class Car extends RODIN.Sculpt {
         this.transmission.on(RODIN.CONST.GAMEPAD_HOVER_OUT, this.onTransHoverOut.bind(this));
 
         this.transmission.on(RODIN.CONST.GAMEPAD_BUTTON_DOWN, this.onTransButtonDown.bind(this));
+
 
     }
 
