@@ -31,8 +31,14 @@ export class Car extends RODIN.Sculpt {
 
         this.door.on(RODIN.CONST.GAMEPAD_BUTTON_DOWN, (e) => {
             e.stopPropagation();
-            Teleport.canMove = !Teleport.canMove;
-            RODIN.Avatar.active.position = {x: .8, y: -0.3, z: -5}
+            if(!Teleport.canMove) {
+                Teleport.canMove = true;
+                RODIN.Avatar.active.position = {x: 1, y: 0, z: 1};
+            } else {
+                RODIN.Avatar.active.position = {x: .8, y: -0.3, z: -5};
+                Teleport.canMove = false;
+            }
+
         });
         this.transmission = new RODIN.Sculpt('./models/car/ruchnik.obj');
 
