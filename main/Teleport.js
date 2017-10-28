@@ -10,32 +10,26 @@ class Teleport {
 
     initTeleport() {
         this.mainScene.on(RODIN.CONST.GAMEPAD_MOVE, (e) => {
-            if (e.gamepad instanceof RODIN.MouseGamePad) {
+            if(!this.portal.visible) {
                 this.portal.visible = true;
-                this.portal.parent = RODIN.Scene.active;
-                this.portal.position.copy(e.point)
             }
+            this.portal.parent = RODIN.Scene.active;
+            this.portal.position.copy(e.point)
         });
         this.mainScene.on(RODIN.CONST.GAMEPAD_BUTTON_DOWN, (e) => {
-            if (e.button.keyCode === RODIN.CONST.MOUSE_LEFT) {
-                this.buttonDownTime = Date.now();
-            }
+            this.buttonDownTime = Date.now();
         });
         this.mainScene.on(RODIN.CONST.GAMEPAD_HOVER_OUT, (e) => {
-            if (e.gamepad instanceof RODIN.MouseGamePad) {
-                this.portal.visible = false;
-            }
+            this.portal.visible = false;
         });
         this.mainScene.on(RODIN.CONST.GAMEPAD_BUTTON_UP, (e) => {
-            if (e.button.keyCode === RODIN.CONST.MOUSE_LEFT) {
-                if(!this.buttonDownTime) return;
-                if(Date.now() - this.buttonDownTime < 200){
-                    this.teleport(undefined, e.point, e.target.name);
-                }
-
+            if (!this.buttonDownTime) return;
+            if (Date.now() - this.buttonDownTime < 200) {
+                this.teleport(undefined, e.point, e.target.name);
             }
         });
     }
+
     teleport(avatar = RODIN.Avatar.active, pos, place) {
         if (!pos) return;
         avatar.position = pos;
